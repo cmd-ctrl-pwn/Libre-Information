@@ -79,38 +79,14 @@
     <p>&copy; FTP.</p>
   </footer>
 
-  <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const productCard = btn.closest('.product-item');
-        const productId = productCard.id;
-        const productName = productCard.querySelector('h3').innerText;
-        const productPrice = productCard.querySelector('.price').innerText;
-        const productImage = productCard.querySelector('img').src;
+<div class="product-item">
+  <h3>Printed Scripture</h3>
+  <p class="price">0.02 BTC</p>
 
-        const product = { id: productId, name: productName, price: productPrice, image: productImage };
-        const exists = cart.find(item => item.id === product.id);
-
-        if (!exists) {
-          cart.push(product);
-          localStorage.setItem('cart', JSON.stringify(cart));
-          alert(`${productName} added to cart!`);
-          updateCartCount();
-        } else {
-          alert(`${productName} is already in your cart.`);
-        }
-      });
-    });
-
-    function updateCartCount() {
-      const cartCount = cart.length;
-      const cartLink = document.querySelector('#cartLink');
-      if (cartLink) {
-        cartLink.innerText = `My Cart (${cartCount})`;
-      }
-    }
-    updateCartCount();
-  </script>
+  <form method="POST" action="/cart/add">
+    <input type="hidden" name="product_id" value="scripture-001">
+    <button type="submit">Add to Cart</button>
+  </form>
+</div>
 </body>
 </html>   
